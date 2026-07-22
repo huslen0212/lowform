@@ -10,8 +10,7 @@ export default async function HomePage() {
   const payload = await getPayload({ config: payloadConfig })
   const { user } = await payload.auth({ headers })
 
-  const res = await fetch('http://localhost:3000/my-route', { cache: 'no-store' })
-  const posters = await res.json()
+  const { docs: posters } = await payload.find({ collection: 'poster' })
 
   return (
     <div className="min-h-screen bg-linear-to-b from-gray-900 to-gray-500 flex flex-col items-center text-white">
