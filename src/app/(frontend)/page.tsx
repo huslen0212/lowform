@@ -1,15 +1,17 @@
 import { headers as getHeaders } from 'next/headers.js'
-import Image from 'next/image'
 import { getPayload } from 'payload'
-import { Button } from '@/components/ui/button'
 import config from '@/payload.config'
 import './styles.css'
+import Image from 'next/image'
 
 export default async function HomePage() {
   const headers = await getHeaders()
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })
   const { user } = await payload.auth({ headers })
+
+  const res = await fetch('http://localhost:3000/my-route', { cache: 'no-store' })
+  const posters = await res.json()
 
   return (
     <div className="min-h-screen bg-linear-to-b from-gray-900 to-gray-500 flex flex-col items-center text-white">
@@ -41,6 +43,27 @@ export default async function HomePage() {
         <div className="font-mono text-lg md:text-3xl text-black mb-1 text-left -mt-3 ">
           <p>REMEMBER IT.</p>
         </div>
+      </div>
+
+      <div className="w-full grid grid-cols-3 gap-4 place-items-center p-10">
+        {posters.map((poster: any) => (
+          <div key={poster.id} className="flex flex-col gap-2 w-full">
+            {poster.url && (
+              <div className="w-full aspect-square overflow-hidden">
+                <Image
+                  src={poster.url}
+                  alt={poster.name}
+                  width={300}
+                  height={300}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            )}
+            <p className="text-sm font-mono tracking-widest uppercase">
+              {poster.name} - {poster.code}
+            </p>
+          </div>
+        ))}
       </div>
     </div>
   )
