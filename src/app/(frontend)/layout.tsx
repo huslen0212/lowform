@@ -1,9 +1,10 @@
 import React from 'react'
+import Header from './components/Header'
 import './styles.css'
 
 export const metadata = {
-  description: 'A blank template using Payload in a Next.js app.',
-  title: 'Payload Blank Template',
+  description: 'Lowform — Automotive Posters',
+  title: 'Lowform',
 }
 
 export default async function RootLayout(props: { children: React.ReactNode }) {
@@ -11,8 +12,9 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
 
   return (
     <html lang="en">
-      <body>
-        <main>{children}</main>
+      <body className="bg-[#1a1f2e] text-white">
+        <Header />
+        {children}
       </body>
     </html>
   )
