@@ -19,7 +19,7 @@ export default async function HomePage() {
         {/* <Image src="/LF-logo.jpg" alt="LF" width={480} height={240} className="h-16 w-auto" /> */}
 
         <div className="md:text-8xl italic font-black tracking-widest uppercase">
-          <p className="">lowform</p>
+          <p className="">lowform </p>
         </div>
 
         <div className="flex items-center gap-3 md:text-1xl tracking-[0.8em] text-white uppercase -mt-10 -ml-2">
