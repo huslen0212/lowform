@@ -17,6 +17,10 @@
   }
 }
 
+@theme {
+  --font-science: var(--font-science-gothic);
+}
+
 :root {
   --font-mono: 'Roboto Mono', monospace;
   --header-bg: white;
@@ -73,10 +77,9 @@ body,
 }
 
 body {
-  font-family: system-ui;
+  font-family: var(--font-science-gothic);
   font-size: 18px;
   line-height: 32px;
-
   margin: 0;
   color: rgb(1000, 1000, 1000);
 
