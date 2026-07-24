@@ -1,12 +1,12 @@
+import Image from 'next/image'
+
 export default function Footer() {
   return (
     <footer className="px-12 py-12 max-md:px-6 border-t border-[rgba(243,241,236,0.1)] flex items-center justify-between flex-wrap gap-5 max-md:flex-col max-md:items-start">
       <div className="flex items-center gap-3">
-        <div className="w-7 h-7 bg-[#f3f1ec] text-[#0c0e12] flex items-center justify-center font-['Oswald'] font-bold text-[13px]">
-          LF
-        </div>
+        <Image src="/LF-logo.png" alt="Lowform" width={35} height={35} unoptimized />
 
-        <span className="font-['Oswald'] font-semibold text-[16px] tracking-[1px]">
+        <span className="font-science font-semibold text-[16px] tracking-[1px]">
           LOWFORM © 2026
         </span>
       </div>

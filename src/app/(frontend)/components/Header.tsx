@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 
 export default function Header() {
   const [open, setOpen] = useState(false)
@@ -10,10 +11,8 @@ export default function Header() {
       <div className="flex items-center justify-between px-12 py-5 max-md:px-6">
         {/* Logo */}
         <div className="flex items-center gap-3">
-          <div className="w-8.5 h-8.5 bg-[#f3f1ec] text-[#0c0e12] flex items-center justify-center font-['Oswald'] font-bold text-base tracking-[-1px]">
-            LF
-          </div>
-          <span className="font-['Oswald'] font-bold text-xl tracking-[2px]">LOWFORM</span>
+          <Image src="/LF-logo.png" alt="Lowform" width={35} height={35} unoptimized />
+          <span className="font-science font-bold text-xl tracking-[2px]">LOWFORM</span>
         </div>
 
         {/* Desktop links */}
