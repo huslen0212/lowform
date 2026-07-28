@@ -55,27 +55,27 @@ export default function Header() {
       {/* Mobile menu */}
       {open && (
         <div className="hidden max-md:flex flex-col border-t border-[rgba(243,241,236,0.1)] px-6 py-4 gap-4 text-[17px] tracking-[1px] uppercase">
-          <a
+          <Link
             href="#shop"
             onClick={() => setOpen(false)}
             className="text-[#f3f1ec] hover:text-[#e8482c] transition-colors py-2"
           >
             Shop
-          </a>
-          <a
-            href="#custom"
+          </Link>
+          <Link
+            href="/custom"
             onClick={() => setOpen(false)}
             className="text-[#f3f1ec] hover:text-[#e8482c] transition-colors py-2"
           >
             Custom
-          </a>
-          <a
+          </Link>
+          <Link
             href="#about"
             onClick={() => setOpen(false)}
             className="text-[#f3f1ec] hover:text-[#e8482c] transition-colors py-2"
           >
             About
-          </a>
+          </Link>
         </div>
       )}
     </nav>
