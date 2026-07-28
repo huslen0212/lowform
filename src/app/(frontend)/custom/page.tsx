@@ -33,7 +33,12 @@ export default function CustomPage() {
   const [file, setFile] = useState<File | null>(null)
   const [preview, setPreview] = useState<string | null>(null)
   const [dragging, setDragging] = useState(false)
+  const [size, setSize] = useState<string>('')
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const inputRef = useRef<HTMLInputElement>(null)
+  const nameRef = useRef<HTMLInputElement>(null)
+  const contactRef = useRef<HTMLInputElement>(null)
+  const carModelRef = useRef<HTMLInputElement>(null)
 
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault()
@@ -51,7 +56,6 @@ export default function CustomPage() {
   }
 
   const handleDragLeave = () => setDragging(false)
-
   const handleClick = () => inputRef.current?.click()
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -59,6 +63,34 @@ export default function CustomPage() {
     if (selected) {
       setFile(selected)
       setPreview(URL.createObjectURL(selected))
+    }
+  }
+
+  const handleSubmit = async () => {
+    const name = nameRef.current?.value?.trim()
+    const contact = contactRef.current?.value?.trim()
+    const carModel = carModelRef.current?.value?.trim()
+
+    if (!name || !contact || !carModel || !size) {
+      alert('Бүх талбарыг бөглөнө үү.')
+      return
+    }
+
+    setStatus('loading')
+
+    const formData = new FormData()
+    formData.append('name', name)
+    formData.append('contact', contact)
+    formData.append('carModel', carModel)
+    formData.append('size', size)
+    if (file) formData.append('file', file)
+
+    try {
+      const res = await fetch('/api/custom', { method: 'POST', body: formData })
+      if (!res.ok) throw new Error()
+      setStatus('success')
+    } catch {
+      setStatus('error')
     }
   }
 
@@ -102,6 +134,7 @@ export default function CustomPage() {
                 Нэр
               </Label>
               <input
+                ref={nameRef}
                 type="text"
                 placeholder="Таны нэр"
                 className="font-science bg-[#12151c] border border-[rgba(243,241,236,0.15)] text-[#f3f1ec] px-4 py-3 md:py-3.5 text-[16px] md:text-[17px] outline-none focus:border-[#e8482c] transition-colors"
@@ -112,6 +145,7 @@ export default function CustomPage() {
                 Утас / И-мэйл
               </Label>
               <input
+                ref={contactRef}
                 type="text"
                 placeholder="9911-XXXX"
                 className="font-science bg-[#12151c] border border-[rgba(243,241,236,0.15)] text-[#f3f1ec] px-4 py-3 md:py-3.5 text-[16px] md:text-[17px] outline-none focus:border-[#e8482c] transition-colors"
@@ -122,6 +156,7 @@ export default function CustomPage() {
                 Машины загвар
               </Label>
               <input
+                ref={carModelRef}
                 type="text"
                 placeholder="Жишээ: Toyota Crown 210"
                 className="font-science bg-[#12151c] border border-[rgba(243,241,236,0.15)] text-[#f3f1ec] px-4 py-3 md:py-3.5 text-[16px] md:text-[17px] outline-none focus:border-[#e8482c] transition-colors"
@@ -171,42 +206,46 @@ export default function CustomPage() {
 
             <div className="flex flex-col gap-1.5 mt-5">
               <Label className="font-science text-[13px] tracking-[2px] uppercase text-[#8a8f9c]">
-                Хэмжээ / Хүрээ
+                Хэмжээ
               </Label>
-              <Select>
+              <Select onValueChange={(val: string | null) => setSize(val ?? '')}>
                 <SelectTrigger className="font-science bg-[#12151c] border border-[rgba(243,241,236,0.15)] text-[#f3f1ec] px-4 py-3 md:py-3.5 text-[16px] md:text-[17px] outline-none focus:border-[#e8482c] focus:ring-0 transition-colors rounded-none h-auto w-full">
                   <SelectValue placeholder="Хэмжээ сонгох" />
                 </SelectTrigger>
                 <SelectContent className="font-science bg-[#12151c] border border-[rgba(243,241,236,0.15)] text-[#f3f1ec] rounded-none">
                   <SelectItem
-                    value="a2-no-frame"
-                    className="font-science text-[15px] focus:bg-[#f2f4f7] focus:text-[#f3f1ec] rounded-none"
+                    value="30см × 40см"
+                    className="font-science text-[15px] focus:bg-[#ffffff] focus:text-[#f3f1ec] rounded-none"
                   >
-                    A2 — Хүрээгүй
+                    30см × 40см
                   </SelectItem>
                   <SelectItem
-                    value="a2-frame"
-                    className="font-science text-[15px] focus:bg-[#f2f4f7] focus:text-[#f3f1ec] rounded-none"
+                    value="50см × 60см"
+                    className="font-science text-[15px] focus:bg-[#ffffff] focus:text-[#f3f1ec] rounded-none"
                   >
-                    A2 — Хүрээтэй
-                  </SelectItem>
-                  <SelectItem
-                    value="a1-no-frame"
-                    className="font-science text-[15px] focus:bg-[#f2f4f7] focus:text-[#f3f1ec] rounded-none"
-                  >
-                    A1 — Хүрээгүй
-                  </SelectItem>
-                  <SelectItem
-                    value="a1-frame"
-                    className="font-science text-[15px] focus:bg-[#f2f4f7] focus:text-[#f3f1ec] rounded-none"
-                  >
-                    A1 — Хүрээтэй
+                    50см × 60см
                   </SelectItem>
                 </SelectContent>
               </Select>
             </div>
-            <Button className="font-science w-full mt-7 bg-[#e8482c] text-[#0c0e12] py-4 font-semibold text-[16px] md:text-[17px] tracking-[2px] uppercase hover:bg-[#ff6a45] transition-colors rounded-none h-auto">
-              Хүсэлт илгээх
+
+            {status === 'success' && (
+              <p className="font-science text-[#e8482c] text-[14px] tracking-[1px] uppercase mt-5">
+                ✓ Захиалга амжилттай илгээгдлээ
+              </p>
+            )}
+            {status === 'error' && (
+              <p className="font-science text-[#8a8f9c] text-[14px] tracking-[1px] uppercase mt-5">
+                Алдаа гарлаа. Дахин оролдоно уу.
+              </p>
+            )}
+
+            <Button
+              onClick={handleSubmit}
+              disabled={status === 'loading'}
+              className="font-science w-full mt-7 bg-[#e8482c] text-[#0c0e12] py-4 font-semibold text-[16px] md:text-[17px] tracking-[2px] uppercase hover:bg-[#ff6a45] transition-colors rounded-none h-auto disabled:opacity-50"
+            >
+              {status === 'loading' ? 'Илгээж байна...' : 'Захиалга өгөх'}
             </Button>
           </div>
         </div>
