@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export default function Header() {
   const [open, setOpen] = useState(false)
@@ -10,22 +11,27 @@ export default function Header() {
     <nav className="sticky top-0 z-50 bg-[rgba(12,14,18,0.9)] backdrop-blur-sm border-b border-[rgba(243,241,236,0.1)]">
       <div className="flex items-center justify-between px-12 py-5 max-md:px-6">
         {/* Logo */}
+
         <div className="flex items-center gap-3">
-          <Image src="/LF-logo.png" alt="Lowform" width={35} height={35} unoptimized />
-          <span className="font-science font-bold text-xl tracking-[2px]">LOWFORM</span>
+          <Link href="/" className="flex items-center gap-3">
+            <Image src="/LF-logo.png" alt="Lowform" width={35} height={35} unoptimized />
+            <span className="font-science font-bold text-xl tracking-[2px]">LOWFORM</span>
+          </Link>
         </div>
 
         {/* Desktop links */}
         <div className="flex gap-9 text-[17px] tracking-[1px] uppercase max-md:hidden">
-          <a href="#shop" className="text-[#f3f1ec] hover:text-[#e8482c] transition-colors">
+          <Link href="#shop" className="text-[#f3f1ec] hover:text-[#e8482c] transition-colors">
             Shop
-          </a>
-          <a href="#custom" className="text-[#f3f1ec] hover:text-[#e8482c] transition-colors">
+          </Link>
+
+          <Link href="/custom" className="text-[#f3f1ec] hover:text-[#e8482c] transition-colors">
             Custom
-          </a>
-          <a href="#about" className="text-[#f3f1ec] hover:text-[#e8482c] transition-colors">
+          </Link>
+
+          <Link href="#about" className="text-[#f3f1ec] hover:text-[#e8482c] transition-colors">
             About
-          </a>
+          </Link>
         </div>
 
         {/* Hamburger */}
