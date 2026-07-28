@@ -25,6 +25,9 @@ export const metadata = {
     locale: 'mn_MN',
     type: 'website',
   },
+  icons: {
+    icon: '/logo.jpg',
+  },
 }
 
 const scienceGothic = localFont({
