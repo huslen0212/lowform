@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
 
   await transporter.sendMail({
     from: process.env.SMTP_USER,
-    to: process.env.RECEIVER_EMAIL,
+    to: 'Lowform123@gmail.com',
     subject: `Шинэ захиалга — ${carModel}`,
     html: `
       <h2>Шинэ захиалга</h2>
