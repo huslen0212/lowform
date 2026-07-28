@@ -5,8 +5,26 @@ import Footer from './components/Footer'
 import localFont from 'next/font/local'
 
 export const metadata = {
-  description: 'Lowform — Automotive Posters',
-  title: 'Lowform',
+  title: 'Lowform — Automotive Posters',
+  description:
+    'JDM болон дуртай машиныхаа зурган дээр үндэслэсэн студи постер захиал. Toyota, Nissan, Subaru болон бусад JDM машины постер.',
+  keywords: 'lowform, low, form, automotive, mashin poster',
+  openGraph: {
+    title: 'Lowform — Automotive Posters',
+    description: 'JDM болон дуртай машиныхаа зурган дээр үндэслэсэн студи постер захиал.',
+    url: 'https://lowform-shop.vercel.app/',
+    siteName: 'Lowform',
+    images: [
+      {
+        url: 'https://lowform-shop.vercel.app/metadata-logo.jpg',
+        width: 800,
+        height: 600,
+        alt: 'Lowform Automotive Posters',
+      },
+    ],
+    locale: 'mn_MN',
+    type: 'website',
+  },
 }
 
 const scienceGothic = localFont({
