@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 
 export default function Footer() {
   return (
@@ -12,15 +13,16 @@ export default function Footer() {
       </div>
 
       <div className="flex gap-7 text-[16px] text-[#8a8f9c] max-md:flex-wrap max-md:gap-4">
-        <a href="#" className="hover:text-[#f3f1ec] transition-colors">
+        <Link
+          href="https://www.instagram.com/_lowform/"
+          target="_blank"
+          rel="noreferrer"
+          className="hover:text-[#f3f1ec] transition-colors"
+        >
           Instagram
-        </a>
-        <a href="#" className="hover:text-[#f3f1ec] transition-colors">
-          Facebook
-        </a>
-        <a href="#" className="text-[#8a8f9c] hover:text-[#f3f1ec] transition-colors">
-          hello@lowform.mn
-        </a>
+        </Link>
+
+        <span>Lowform123@gmail.com</span>
       </div>
     </footer>
   )
