@@ -89,7 +89,7 @@ export default async function HomePage() {
               key={poster.id}
               className="flex flex-col bg-[#12151c] border border-[rgba(243,241,236,0.08)]"
             >
-              <div className="relative aspect-3/4 w-full">
+              <div className="relative aspect-4/5 w-full">
                 {poster.url ? (
                   <Image src={poster.url} alt={poster.name} fill className="object-fill" />
                 ) : (
