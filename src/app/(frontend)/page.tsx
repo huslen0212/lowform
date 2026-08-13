@@ -83,29 +83,23 @@ export default async function HomePage() {
           </span>
         </div>
 
-        <div className="grid grid-cols-3 max-md:grid-cols-1 gap-9 max-w-350 mx-auto">
+        <div className="grid grid-cols-3 max-md:grid-cols-1 gap-9 max-w-250 mx-auto">
           {posters.map((poster: any) => (
             <div
               key={poster.id}
               className="flex flex-col bg-[#12151c] border border-[rgba(243,241,236,0.08)]"
             >
-              <div className="relative aspect-4/4 w-full">
+              <div className="relative aspect-3/4 w-full">
                 {poster.url ? (
-                  <Image src={poster.url} alt={poster.name} fill className="object-cover" />
+                  <Image src={poster.url} alt={poster.name} fill className="object-fill" />
                 ) : (
                   <div className="w-full h-full bg-[#1a1d24] flex items-center justify-center text-[#3a3f4d] font- text-[13px] tracking-[2px] uppercase">
                     Зураг байхгүй
                   </div>
                 )}
-                {poster.color && (
-                  <div
-                    className="absolute top-3.5 right-3.5 w-5 h-5 rounded-full border border-white"
-                    style={{ backgroundColor: poster.color }}
-                  />
-                )}
               </div>
-              <div className="px-6 pt-5.5 pb-6.5 flex flex-col gap-2">
-                <h3 className="font-science text-[24px] tracking-[0.5px] uppercase">
+              <div className="px-5 flex flex-col">
+                <h3 className="font-science text-[24px] tracking-[0.5px] uppercase pt-3">
                   {poster.name}
                 </h3>
                 <p className="text-[15px] text-[#5c6270] tracking-[2px] uppercase font-science">
